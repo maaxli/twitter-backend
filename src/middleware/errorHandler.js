@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-    res.json({ error: "Unknown error occured!" });
+    res.json(err);
 }
 
 module.exports = errorHandler;
