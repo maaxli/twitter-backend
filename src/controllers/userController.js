@@ -1,5 +1,9 @@
 const asyncHandler = require('express-async-handler');
 const { PrismaClient } = require('@prisma/client');
+const { 
+    generateUniqueEmailToken, 
+    generateDbEmailToken 
+} = require('./authController');
 
 const prisma = new PrismaClient();
 
@@ -53,6 +57,7 @@ const createUser = asyncHandler(async(req, res, err) => {
         const newUser = await prisma.user.create({
             data: { email, name, username }
         });
+        await generateUniqueEmailToken(email, )
         res.status(201).json(newUser);
     } catch (e) {
         res.status(400).json({ error: "Unable to create new user." }); // potentially due to unique fields
