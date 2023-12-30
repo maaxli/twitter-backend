@@ -40,6 +40,25 @@ const getUser = asyncHandler(async(req, res, err) => {
     res.status(200).json(user);
 });
 
+//@desc Create a user
+//@route POST /users
+//@access public
+const createUser = asyncHandler(async(req, res, err) => {
+    const { email, name, username } = req.body;
+    if (!email || !name || !username) {
+        res.status(400).json({ error: "All fields required." });
+        return;
+    }
+    try {
+        const newUser = await prisma.user.create({
+            data: { email, name, username }
+        });
+        res.status(201).json(newUser);
+    } catch (e) {
+        res.status(400).json({ error: "Unable to create new user." }); // potentially due to unique fields
+    }
+});
+
 //@desc Update a user
 //@route PUT /users/:id
 //@access private
@@ -86,6 +105,7 @@ const deleteUser = asyncHandler(async(req, res, err) => {
 module.exports = {
     getUsers,
     getUser,
+    createUser,
     updateUser,
     deleteUser
 }
