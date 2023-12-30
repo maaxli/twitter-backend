@@ -18,6 +18,8 @@ model User {
   email String @unique
   name String
   username String @unique
+
+  image String?
   bio String?
   isVerified Boolean @default(false)
 
