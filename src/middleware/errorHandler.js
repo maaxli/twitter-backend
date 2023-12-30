@@ -1,4 +1,4 @@
-const errorHandler = (req, res, next, err) => {
+const errorHandler = (err, req, res, next) => {
     res.json({ error: "Unknown error occured!" });
 }
 
