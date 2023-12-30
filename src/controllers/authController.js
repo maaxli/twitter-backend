@@ -7,7 +7,6 @@ const EMAIL_TOKEN_EXPIRATION_MINIUTES = 10;
 
 //@desc Generate a db email token and send an email containing the token to the client
 async function generateDbEmailToken(email, emailTokenString) {
-    console.log(`email token string: ${emailTokenString}`);
     const expiration = new Date(new Date().getTime() + EMAIL_TOKEN_EXPIRATION_MINIUTES * 60 * 1000);
     try {
         await prisma.token.create({
