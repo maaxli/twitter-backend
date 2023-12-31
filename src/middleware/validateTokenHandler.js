@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
+const JWT_SECRET = process.env.JWT_SECRET || "SECRET TOKEN";
 
 const validateToken = asyncHandler(async(req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -17,7 +18,7 @@ const validateToken = asyncHandler(async(req, res, next) => {
     }
 
     // Verify the JWT
-    await jwt.verify(jwtToken, process.env.JWT_SECRET, async (err, decoded) => {
+    await jwt.verify(jwtToken, JWT_SECRET, async (err, decoded) => {
         if (err) {
             console.log(err);
             res.sendStatus(401);

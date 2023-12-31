@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 const EMAIL_TOKEN_EXPIRATION_MINIUTES = 30;
 const JWT_EXPIRATION_HOURS = 12;
+const JWT_SECRET = process.env.JWT_SECRET || "SECRET TOKEN";
 
 /* Generate a db email token and send an email containing the token to the client
  *
@@ -57,7 +58,7 @@ async function generateUniqueEmailToken() {
 function generateJWT(tokenId) {
     return jwt.sign(
         { tokenId },
-        process.env.JWT_SECRET,
+        JWT_SECRET,
         {
             algorithm: "HS256",
             expiresIn: "12h"
