@@ -76,6 +76,13 @@ const updateUser = asyncHandler(async(req, res, err) => {
         return;
     }
 
+    // Users can only update themselves and not others
+    const clientId = req.user.id;
+    if (asNum !== clientId) {
+        res.sendStatus(401);
+        return;
+    }
+
     const { email, name, image, bio } = req.body;
     try {
         const updatedUser = await prisma.user.update({
@@ -98,6 +105,14 @@ const deleteUser = asyncHandler(async(req, res, err) => {
         res.status(404).json({ error: "User does not exist." });
         return;
     }
+
+    // Users can only delete themselves and not others
+    const clientId = req.user.id;
+    if (asNum !== clientId) {
+        res.sendStatus(401);
+        return;
+    }
+
     try {
         await prisma.user.delete({
             where: { id: asNum }
