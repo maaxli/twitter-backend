@@ -2,8 +2,7 @@
 
 Built with Express, Prisma, and SQLite
 
-## To-dos:
-- Send email tokens with SendGrid
+## Future Features:
 - Implement redirection if no account exists upon login
 - Implement backend for tweet feed
 - Implement cookies (for JWT)?
