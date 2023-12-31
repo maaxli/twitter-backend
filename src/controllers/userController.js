@@ -59,7 +59,7 @@ const createUser = asyncHandler(async(req, res, err) => {
         });
         const uniqueEmailToken = await generateUniqueEmailToken();
         await generateDbEmailToken(email, uniqueEmailToken);
-        res.status(201).json(newUser);
+        res.status(201).json(newUser); // Should redirect to a sign in page & tell user to check email for token
     } catch (e) {
         res.status(400).json({ error: "Unable to create new user." }); // potentially due to unique fields
     }

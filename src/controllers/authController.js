@@ -1,6 +1,7 @@
 const asycnHandler = require('express-async-handler');
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
+const sendEmail = require('../services/emailService');
 
 const prisma = new PrismaClient();
 
@@ -28,7 +29,7 @@ async function generateDbEmailToken(email, emailTokenString) {
                 }
             }
         });
-        // TODO: send email token to user's email using SendGrid
+        await sendEmail(email, emailTokenString);
     } catch (e) {
         throw new Error(e);
     }
