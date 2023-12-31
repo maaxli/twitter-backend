@@ -1,6 +1,6 @@
-## Twitter Backend
+## Twitter Backend Clone
 
-Built with Express, Prisma, and SQLite
+Built with Express, Prisma, SQLite, and AWS SES
 
 ## Future Features:
 - Implement redirection if no account exists upon login
